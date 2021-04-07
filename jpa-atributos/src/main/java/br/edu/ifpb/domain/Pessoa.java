@@ -1,11 +1,7 @@
 package br.edu.ifpb.domain;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author Ricardo Job
@@ -26,32 +22,37 @@ public class Pessoa implements Serializable {
         );
     */
     private String nome;
+    @Enumerated(EnumType.ORDINAL)
+//    @Enumerated(EnumType.STRING)
+    private Sexo sexo;
 
     public Pessoa() {
     }
-
-    public Pessoa(int id,String nome) {
+    public Pessoa(String nome, Sexo sexo) {
+        this.nome=nome;
+        this.sexo =sexo;
+    }
+    public Pessoa(int id,String nome, Sexo sexo) {
+        this(nome, sexo);
         this.id = id;
-        this.nome = nome;
     }
-    public Pessoa(String nome) {
-        this.nome = nome;
-    }
-
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
+    }
+    public Sexo getSexo() {
+        return sexo;
+    }
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
     }
 
     @Override

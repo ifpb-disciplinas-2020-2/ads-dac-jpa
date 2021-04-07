@@ -1,9 +1,7 @@
 package br.edu.ifpb.main;
 
-import br.edu.ifpb.domain.Aluno;
-import br.edu.ifpb.domain.Perfil;
-import br.edu.ifpb.domain.Pessoa;
-import br.edu.ifpb.domain.Professor;
+import br.edu.ifpb.domain.*;
+
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -20,8 +18,21 @@ public class Main {
         EntityManager entityManager = Persistence
             .createEntityManagerFactory("ExemploPU2")
             .createEntityManager();
-        persistirAluno(entityManager);
+        persistirPessoa(entityManager);
     }
+
+    private static void persistirPessoa(EntityManager entityManager) {
+        Pessoa pessoa = new Pessoa("Job", Sexo.MASCULINO);
+        EntityTransaction transaction = entityManager.getTransaction();
+        //iniciar uma transação
+        transaction.begin();
+        entityManager.persist(pessoa);
+        //comitar uma transação
+        transaction.commit();
+    }
+
+
+
 
     private static void persistirAluno(EntityManager entityManager) {
         Aluno aluno = new Aluno("Job", "1234567890");
@@ -48,15 +59,6 @@ public class Main {
         transaction.commit();
     }
 
-    private static void persistirPessoa(EntityManager entityManager) {
-        Pessoa pessoa = new Pessoa("Job");
-        EntityTransaction transaction = entityManager.getTransaction();
-        //iniciar uma transação
-        transaction.begin();
-        entityManager.persist(pessoa);
-        //comitar uma transação
-        transaction.commit();
-    }
 
     private static void listarPessoas(EntityManager entityManager) {
         List<Pessoa> resultList = entityManager.createQuery("SELECT p FROM Pessoa p")
