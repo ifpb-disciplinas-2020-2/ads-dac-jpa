@@ -22,6 +22,9 @@ public class Main {
     }
     private static void persistirProfessor(EntityManager entityManager) {
         Professor professor = new Professor("R. Job");
+        professor.novoEmail("ricardo.job@ifpb.edu.br");
+        professor.novoEmail("ricardo@ifpb.edu.br");
+        professor.novoEmail("job@ifpb.edu.br");
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         entityManager.persist(professor);
