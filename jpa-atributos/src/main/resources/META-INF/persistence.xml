@@ -16,13 +16,13 @@
     </persistence-unit>
     <persistence-unit name="ExemploPU2" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <class>br.edu.ifpb.domain.Pessoa</class>
+        <class>br.edu.ifpb.domain.Professor</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:./database/jpa.db"/>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="javax.persistence.jdbc.user" value="username"/>
             <property name="javax.persistence.jdbc.password" value="pass12345"/>
-            <property name="javax.persistence.schema-generation.database.action" value="create"/>
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
         </properties>
     </persistence-unit>
 </persistence>

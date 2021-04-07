@@ -18,8 +18,26 @@ public class Main {
         EntityManager entityManager = Persistence
             .createEntityManagerFactory("ExemploPU2")
             .createEntityManager();
-        persistirPessoa(entityManager);
+        persistirProfessor(entityManager);
     }
+    private static void persistirProfessor(EntityManager entityManager) {
+        Professor professor = new Professor("R. Job");
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.persist(professor);
+        transaction.commit();
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     private static void persistirPessoa(EntityManager entityManager) {
         Pessoa pessoa = new Pessoa("Job", Sexo.MASCULINO);
@@ -30,9 +48,6 @@ public class Main {
         //comitar uma transação
         transaction.commit();
     }
-
-
-
 
     private static void persistirAluno(EntityManager entityManager) {
         Aluno aluno = new Aluno("Job", "1234567890");
@@ -51,13 +66,7 @@ public class Main {
         transaction.commit();
     }
 
-    private static void persistirProfessor(EntityManager entityManager) {
-        Professor professor = new Professor("R. Job");
-        EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
-        entityManager.persist(professor);
-        transaction.commit();
-    }
+
 
 
     private static void listarPessoas(EntityManager entityManager) {

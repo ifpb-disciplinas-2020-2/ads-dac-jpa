@@ -1,11 +1,8 @@
 package br.edu.ifpb.domain;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.TableGenerator;
+import java.util.Date;
+import javax.persistence.*;
 
 /**
  * @author Ricardo Job
@@ -30,12 +27,19 @@ public class Professor implements Serializable {
     )
     private int id;
     private String nome;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataDeNascimento;
 
     public Professor() {
     }
 
     public Professor(String nome) {
+        this(nome, new Date());
+    }
+
+    public Professor(String nome, Date dataDeNascimento) {
         this.nome = nome;
+        this.dataDeNascimento = dataDeNascimento;
     }
 
     public int getId() {
