@@ -18,18 +18,18 @@ public class Main {
         EntityManager entityManager = Persistence
             .createEntityManagerFactory("ExemploPU2")
             .createEntityManager();
-        persistirProfessor(entityManager);
+        persistirAluno(entityManager);
     }
-    private static void persistirProfessor(EntityManager entityManager) {
-        Professor professor = new Professor("R. Job");
-        professor.novoEmail("ricardo.job@ifpb.edu.br");
-        professor.novoEmail("ricardo@ifpb.edu.br");
-        professor.novoEmail("job@ifpb.edu.br");
+
+    private static void persistirAluno(EntityManager entityManager) {
+        CPF cpf = new CPF("12312312312");
+        Aluno aluno = new Aluno("Job", "1234567890", cpf);
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        entityManager.persist(professor);
+        entityManager.persist(aluno);
         transaction.commit();
     }
+
 
 
 
@@ -51,27 +51,43 @@ public class Main {
         //comitar uma transação
         transaction.commit();
     }
-
-    private static void persistirAluno(EntityManager entityManager) {
-        Aluno aluno = new Aluno("Job", "1234567890");
+    private static void persistirProfessor(EntityManager entityManager) {
+        Professor professor = new Professor("R. Job");
+        professor.novoEmail("ricardo.job@ifpb.edu.br");
+        professor.novoEmail("ricardo@ifpb.edu.br");
+        professor.novoEmail("job@ifpb.edu.br");
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        entityManager.persist(aluno);
+        entityManager.persist(professor);
         transaction.commit();
     }
-
     private static void persistirPerfil(EntityManager entityManager) {
-        Perfil  perfil = new Perfil("ricardojob");
-        EntityTransaction transaction = entityManager.getTransaction();
+        String descricao = "s entidades são convertidas para tabelas no banco..\n"
+                + "Os atributos simples desta entidade são convertidos às colunas da respectiva tabela \n."
+                + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+                + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+                + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+                + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+                + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+                + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+                + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+                + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+                + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+                + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+                + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+                + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+                + "-Todas as anotações estão presentes no pacote javax.persistence.*";
 
+        Perfil  perfil = new Perfil(
+                "ricardojob",
+                "src/main/resources/imagens/job.jpg"
+        );
+        perfil.setDescricao(descricao);
+        EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         entityManager.persist(perfil);
         transaction.commit();
     }
-
-
-
-
     private static void listarPessoas(EntityManager entityManager) {
         List<Pessoa> resultList = entityManager.createQuery("SELECT p FROM Pessoa p")
             .getResultList();
