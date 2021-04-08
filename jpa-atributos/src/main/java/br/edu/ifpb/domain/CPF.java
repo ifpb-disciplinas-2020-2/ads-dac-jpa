@@ -28,6 +28,9 @@ public class CPF implements Serializable {
         return valor; //123.456.789-10
     }
     public boolean valido() {
-        return true; //false
+        if (valor == null) {
+            return false;
+        }
+        return this.valor.trim().length() <= 11;
     }
 }

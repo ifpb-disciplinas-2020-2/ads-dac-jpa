@@ -1,6 +1,9 @@
 package br.edu.ifpb.main;
 
 import br.edu.ifpb.domain.*;
+import br.edu.ifpb.domain.chaves.Telefone;
+import br.edu.ifpb.domain.chaves.TelefoneChaveComposta;
+import br.edu.ifpb.domain.chaves.TelefoneChaveCompostaEmbedded;
 
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -19,8 +22,13 @@ public class Main {
             .createEntityManagerFactory("ExemploPU2")
             .createEntityManager();
         persistirAluno(entityManager);
+        persistirPessoa(entityManager);
+        persistirProfessor(entityManager);
+        persistirPerfil(entityManager);
+        persistirTelefone(entityManager);
+        listarPessoas(entityManager);
+        listarTelefone(entityManager);
     }
-
     private static void persistirAluno(EntityManager entityManager) {
         CPF cpf = new CPF("12312312312");
         Aluno aluno = new Aluno("Job", "1234567890", cpf);
@@ -29,19 +37,6 @@ public class Main {
         entityManager.persist(aluno);
         transaction.commit();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
     private static void persistirPessoa(EntityManager entityManager) {
         Pessoa pessoa = new Pessoa("Job", Sexo.MASCULINO);
         EntityTransaction transaction = entityManager.getTransaction();
@@ -88,6 +83,15 @@ public class Main {
         entityManager.persist(perfil);
         transaction.commit();
     }
+    private static void persistirTelefone(EntityManager entityManager) {
+        Telefone telefone= new Telefone(
+                "83", "3532-4100"
+        );
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.persist(telefone);
+        transaction.commit();
+    }
     private static void listarPessoas(EntityManager entityManager) {
         List<Pessoa> resultList = entityManager.createQuery("SELECT p FROM Pessoa p")
             .getResultList();
@@ -96,4 +100,12 @@ public class Main {
             System.out.println("\tId: " + p.getId());
         });
     }
+    private static void listarTelefone(EntityManager entityManager) {
+        TelefoneChaveComposta chave = new TelefoneChaveComposta(
+                "83", "3532-4100"
+        );
+        Telefone tel = entityManager.find(Telefone.class, chave);
+        System.out.println(tel.formatado());
+    }
+
 }
