@@ -16,6 +16,8 @@ public class Main {
         EntityManager entityManager = Persistence
             .createEntityManagerFactory("ExemploPU")
             .createEntityManager();
+
+
         Endereco endereco = new Endereco(
           "Minha rua",
           "Meu bairro",

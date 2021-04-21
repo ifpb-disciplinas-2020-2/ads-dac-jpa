@@ -14,7 +14,7 @@ import javax.persistence.*;
  */
 @Entity
 public class Gerente implements Serializable {
- @Id
+    @Id
     @GeneratedValue
     private int id;
     private String nome;
@@ -25,11 +25,13 @@ public class Gerente implements Serializable {
     private Date fim;
 
     // UM Gerente gerencia UM Departamento
-    @OneToOne// 1 -> 1 bidirecional (possuídora)
+    // 1 -> 1 bidirecional (possuídora)
+    @OneToOne
    private  Departamento departamento;
 
-    //UM Gerente coordena MUITOS Projetos
-    @OneToMany(mappedBy = "gerente") // 1 -> N bidirecional (inverso)
+//    UM Gerente coordena MUITOS Projetos
+    // 1 -> N bidirecional (inverso)
+    @OneToMany(mappedBy = "gerente")
     private List<Projeto> projetos = new ArrayList<>();
 
    public Gerente() {
@@ -42,6 +44,7 @@ public class Gerente implements Serializable {
       this.fim = new Date();
    }
    public void novo(Projeto projeto){
+//       projeto.setGerente(this);
        this.projetos.add(projeto);
    }
 
